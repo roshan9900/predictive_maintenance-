@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/f9c60fae6f8b47f5bbfda151744f4570/artifacts
+end_time: 1729360911604
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f9c60fae6f8b47f5bbfda151744f4570
+run_name: funny-slug-360
+run_uuid: f9c60fae6f8b47f5bbfda151744f4570
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729360911255
+status: 3
+tags: []
+user_id: Roshan Salunke

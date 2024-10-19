@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/7263b406bf4543c796e9ae66850dcb4a/artifacts
+end_time: 1729361016294
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7263b406bf4543c796e9ae66850dcb4a
+run_name: agreeable-turtle-142
+run_uuid: 7263b406bf4543c796e9ae66850dcb4a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729361015965
+status: 3
+tags: []
+user_id: Roshan Salunke

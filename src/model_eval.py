@@ -12,25 +12,33 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 import json
 import yaml
 from dvclive import  Live
+import mlflow
 
 
 try:
-    
-    test_size = yaml.safe_load(open('params.yaml'))['data_collection']['test_size']
-    n_estimators = yaml.safe_load(open('params.yaml'))['model_building']['n_estimators']
-    test_data = pd.read_csv('./data/processed/test_processed.csv')
-    x_test = test_data.iloc[:,:-1]
-    y_test = test_data.iloc[:,-1]
-
-    rf = pickle.load(open('model.pkl','rb'))
-    pred = rf.predict(x_test)
-
-    acc = accuracy_score(y_test, pred)
-    f1_scor = f1_score(y_test, pred)
-    precision_scor = precision_score(y_test, pred)
-    recall_scor = recall_score(y_test, pred)
+    with mlflow.start_run():
+        test_size = yaml.safe_load(open('params.yaml'))['data_collection']['test_size']
+        n_estimators = yaml.safe_load(open('params.yaml'))['model_building']['n_estimators']
+        test_data = pd.read_csv('./data/processed/test_processed.csv')
+        x_test = test_data.iloc[:,:-1]
+        y_test = test_data.iloc[:,-1]
 
     
+        rf = pickle.load(open('model.pkl','rb'))
+        pred = rf.predict(x_test)
+
+        acc = accuracy_score(y_test, pred)
+        f1_scor = f1_score(y_test, pred)
+        precision_scor = precision_score(y_test, pred)
+        recall_scor = recall_score(y_test, pred)
+
+        mlflow.log_metric('accuracy',acc)
+        mlflow.log_metric('f1_score',f1_scor)
+        mlflow.log_metric('precission',precision_scor)
+        mlflow.log_metric('recall',recall_scor)
+        
+        mlflow.log_param('test_size',test_size)
+        mlflow.log_param('n_estimators',n_estimators)
         
         
     with Live(save_dvc_exp=True) as live:

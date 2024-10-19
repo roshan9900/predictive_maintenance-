@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/c147686bfba4464097167e46d953f0bc/artifacts
+end_time: 1729360863028
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c147686bfba4464097167e46d953f0bc
+run_name: serious-moose-78
+run_uuid: c147686bfba4464097167e46d953f0bc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729360862606
+status: 3
+tags: []
+user_id: Roshan Salunke
