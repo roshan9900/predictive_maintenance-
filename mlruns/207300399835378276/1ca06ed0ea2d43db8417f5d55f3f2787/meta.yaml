@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/207300399835378276/1ca06ed0ea2d43db8417f5d55f3f2787/artifacts
+end_time: 1729362482657
+entry_point_name: ''
+experiment_id: '207300399835378276'
+lifecycle_stage: active
+run_id: 1ca06ed0ea2d43db8417f5d55f3f2787
+run_name: luminous-mink-490
+run_uuid: 1ca06ed0ea2d43db8417f5d55f3f2787
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729362482421
+status: 3
+tags: []
+user_id: Roshan Salunke

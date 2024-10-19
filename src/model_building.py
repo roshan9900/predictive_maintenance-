@@ -6,7 +6,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 import pickle
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import pickle
 from sklearn.metrics import classification_report
 import yaml
@@ -24,7 +24,7 @@ try:
     n_estimators = yaml.safe_load(open('params.yaml'))['model_building']['n_estimators']
 
 
-    rf = RandomForestClassifier(n_estimators=n_estimators)
+    rf = GradientBoostingClassifier(n_estimators=n_estimators)
     rf.fit(x_train, y_train)
 
 

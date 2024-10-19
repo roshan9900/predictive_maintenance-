@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/207300399835378276/703d570f3ef340288c120702bc48f6f8/artifacts
+end_time: 1729362452404
+entry_point_name: ''
+experiment_id: '207300399835378276'
+lifecycle_stage: active
+run_id: 703d570f3ef340288c120702bc48f6f8
+run_name: upset-koi-907
+run_uuid: 703d570f3ef340288c120702bc48f6f8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729362452138
+status: 3
+tags: []
+user_id: Roshan Salunke

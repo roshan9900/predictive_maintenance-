@@ -6,14 +6,18 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 import pickle
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import pickle
-from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, confusion_matrix
 import json
 import yaml
 from dvclive import  Live
 import mlflow
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+mlflow.set_experiment('gb')
+mlflow.set_tracking_uri('http://127.0.0.1:5000')
 
 try:
     with mlflow.start_run():
@@ -40,6 +44,15 @@ try:
         mlflow.log_param('test_size',test_size)
         mlflow.log_param('n_estimators',n_estimators)
         
+        cm = confusion_matrix(y_test, pred)
+        plt.figure(figsize=(5,5))
+        sns.heatmap(cm, annot=True)
+        plt.xlabel('pred')
+        plt.ylabel('actual')
+        plt.title('cm')
+        plt.savefig('con_met.png')
+        
+        mlflow.log_artifact('con_met.png')
         
     with Live(save_dvc_exp=True) as live:
         
