@@ -56,15 +56,7 @@ try:
         mlflow.log_artifact('con_met.png')
         
         mlflow.sklearn.log_model(rf,'gradient')
-        
         mlflow.log_artifact(__file__)
-        mlflow.set_tag('author','RS')
-        mlflow.set_tag('model','gb')
-
-        
-        
-        
-        
     with Live(save_dvc_exp=True) as live:
         
         

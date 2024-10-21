@@ -20,6 +20,7 @@ import mlflow.sklearn
 mlflow.set_experiment('gb')
 mlflow.set_tracking_uri('http://127.0.0.1:5000')
 
+mlflow.log_artifact(__file__)
 try:
     with mlflow.start_run():
         test_size = yaml.safe_load(open('params.yaml'))['data_collection']['test_size']
@@ -56,11 +57,6 @@ try:
         mlflow.log_artifact('con_met.png')
         
         mlflow.sklearn.log_model(rf,'gradient')
-        
-        mlflow.log_artifact(__file__)
-        mlflow.set_tag('author','RS')
-        mlflow.set_tag('model','gb')
-
         
         
         

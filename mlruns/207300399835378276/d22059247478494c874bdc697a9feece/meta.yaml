@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/207300399835378276/d22059247478494c874bdc697a9feece/artifacts
+end_time: 1729526043451
+entry_point_name: ''
+experiment_id: '207300399835378276'
+lifecycle_stage: active
+run_id: d22059247478494c874bdc697a9feece
+run_name: bemused-toad-363
+run_uuid: d22059247478494c874bdc697a9feece
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729526041326
+status: 3
+tags: []
+user_id: Roshan Salunke

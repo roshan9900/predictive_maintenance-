@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/207300399835378276/05bd958c9faf4c9fb42c5f4c9e6fc660/artifacts
+end_time: 1729526732286
+entry_point_name: ''
+experiment_id: '207300399835378276'
+lifecycle_stage: active
+run_id: 05bd958c9faf4c9fb42c5f4c9e6fc660
+run_name: worried-sheep-910
+run_uuid: 05bd958c9faf4c9fb42c5f4c9e6fc660
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729526720635
+status: 3
+tags: []
+user_id: Roshan Salunke

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/207300399835378276/45b10c8bc7924e279ec258627e6ffaa2/artifacts
+end_time: 1729527102171
+entry_point_name: ''
+experiment_id: '207300399835378276'
+lifecycle_stage: active
+run_id: 45b10c8bc7924e279ec258627e6ffaa2
+run_name: nervous-mink-233
+run_uuid: 45b10c8bc7924e279ec258627e6ffaa2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729527090801
+status: 3
+tags: []
+user_id: Roshan Salunke

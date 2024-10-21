@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/207300399835378276/9bdd1390fd134a9db3ba749e371909c7/artifacts
+end_time: 1729526802993
+entry_point_name: ''
+experiment_id: '207300399835378276'
+lifecycle_stage: active
+run_id: 9bdd1390fd134a9db3ba749e371909c7
+run_name: fortunate-donkey-133
+run_uuid: 9bdd1390fd134a9db3ba749e371909c7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729526802788
+status: 3
+tags: []
+user_id: Roshan Salunke

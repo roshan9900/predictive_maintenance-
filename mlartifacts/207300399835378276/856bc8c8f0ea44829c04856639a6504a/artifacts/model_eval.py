@@ -58,8 +58,6 @@ try:
         mlflow.sklearn.log_model(rf,'gradient')
         
         mlflow.log_artifact(__file__)
-        mlflow.set_tag('author','RS')
-        mlflow.set_tag('model','gb')
 
         
         
