@@ -16,9 +16,11 @@ import mlflow
 import matplotlib.pyplot as plt
 import seaborn as sns
 import mlflow.sklearn
+import dagshub
+dagshub.init(repo_owner='roshansalunke91', repo_name='predictive_maintenance-', mlflow=True)
 
 mlflow.set_experiment('gb')
-mlflow.set_tracking_uri('http://127.0.0.1:5000')
+mlflow.set_tracking_uri('https://dagshub.com/roshansalunke91/predictive_maintenance-.mlflow')
 
 try:
     with mlflow.start_run():
