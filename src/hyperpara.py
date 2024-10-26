@@ -1,0 +1,89 @@
+import pandas as pd
+import numpy as np
+from ucimlrepo import fetch_ucirepo
+import os
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, confusion_matrix
+import mlflow
+import matplotlib.pyplot as plt
+import seaborn as sns
+import json
+
+# Set up MLflow
+mlflow.set_experiment('hyper_para')
+mlflow.set_tracking_uri('https://127.0.0.1:5000')
+
+try:
+    with mlflow.start_run():
+    # Load datasets
+        train = pd.read_csv('./data/processed/train_processed.csv')
+        test = pd.read_csv('./data/processed/test_processed.csv')
+
+    # Prepare features and target
+        x_train = train.drop('Machine failure', axis=1)
+        y_train = train['Machine failure']
+    
+    # Initialize the model and parameter grid
+        rf = RandomForestClassifier(random_state=42)
+        param_dict = {
+        'n_estimators': [100, 300, 500],
+        'max_depth': [None, 10, 20]
+        }
+    
+    # Perform Randomized Search
+        random_search = RandomizedSearchCV(estimator=rf, param_distributions=param_dict, cv=5, n_jobs=-1, verbose=2)
+
+    
+        random_search.fit(x_train, y_train)
+
+        # Log best parameters
+        best_params = random_search.best_params_
+        mlflow.log_params(best_params)
+
+        # Save the best model
+        mlflow.sklearn.log_model(random_search.best_estimator_, 'model')
+
+        # Load test data
+        x_test = test.drop('Machine failure', axis=1)
+        y_test = test['Machine failure']
+
+        # Predict and evaluate
+        pred = random_search.predict(x_test)
+        acc = accuracy_score(y_test, pred)
+        f1_scor = f1_score(y_test, pred)
+        precision_scor = precision_score(y_test, pred)
+        recall_scor = recall_score(y_test, pred)
+
+        # Log metrics
+        mlflow.log_metric('accuracy', acc)
+        mlflow.log_metric('f1_score', f1_scor)
+        mlflow.log_metric('precision', precision_scor)
+        mlflow.log_metric('recall', recall_scor)
+
+        # Log confusion matrix
+        cm = confusion_matrix(y_test, pred)
+        plt.figure(figsize=(5, 5))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+        plt.xlabel('Predicted')
+        plt.ylabel('Actual')
+        plt.title('Confusion Matrix')
+        plt.savefig('con_met.png')
+        mlflow.log_artifact('con_met.png')
+
+        # Log input datasets
+        mlflow.log_artifact('./data/processed/train_processed.csv', artifact_path='train_data')
+        mlflow.log_artifact('./data/processed/test_processed.csv', artifact_path='test_data')
+
+        # Save metrics to a JSON file
+        metrics_dict = {
+            'accuracy': acc,
+            'f1_score': f1_scor,
+            'precision': precision_scor,
+            'recall': recall_scor
+        }
+        with open('metrics.json', 'w') as file:
+            json.dump(metrics_dict, file, indent=4)
+
+except Exception as e:
+    print(f"An error occurred: {e}")
