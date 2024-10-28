@@ -1,4 +1,3 @@
-Here's the documentation in a narrative format, guiding through the project's workflow as a story.
 
 ---
 
@@ -201,4 +200,3 @@ The model's performance metrics are recorded in the `metrics.json` file. Here’
 
 ---
 
-This comprehensive, narrative documentation walks through each step of the predictive maintenance project, creating a clear roadmap for developers and stakeholders alike.
