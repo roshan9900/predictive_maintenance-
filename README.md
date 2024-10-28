@@ -1,22 +1,33 @@
-Predictive Maintenance Project Documentation
-Table of Contents
-Introduction
-Project Structure
-Installation and Setup
-Data Pipeline
-Model Training and Evaluation
-Hyperparameter Tuning for Optimization
-Experiment Tracking and Artifacts
-Metrics and Model Performance
-Running the Project
-Introduction
+Here's the documentation in a narrative format, guiding through the project's workflow as a story.
+
+---
+
+# Predictive Maintenance Project Documentation
+
+### Table of Contents
+1. [Introduction](#introduction)
+2. [Project Structure](#project-structure)
+3. [Installation and Setup](#installation-and-setup)
+4. [Data Pipeline](#data-pipeline)
+5. [Model Training and Evaluation](#model-training-and-evaluation)
+6. [Hyperparameter Tuning for Optimization](#hyperparameter-tuning-for-optimization)
+7. [Experiment Tracking and Artifacts](#experiment-tracking-and-artifacts)
+8. [Metrics and Model Performance](#metrics-and-model-performance)
+9. [Running the Project](#running-the-project)
+
+---
+
+## Introduction
+
 The Predictive Maintenance project aims to forecast machine failures using machine learning, enhancing maintenance schedules, minimizing downtimes, and optimizing operational efficiency. This project follows a well-structured journey, starting with data preparation, progressing through model training, and ultimately reaching the fine-tuning of hyperparameters to achieve the best performance.
 
-Project Structure
+---
+
+## Project Structure
+
 The project is organized into folders and scripts that create a seamless flow from data ingestion to evaluation. Each component serves a critical function, making the pipeline easy to understand and modify.
 
-bash
-Copy code
+```
 project-root/
 │
 ├── .dvc/                           # DVC configuration and cache files
@@ -50,113 +61,144 @@ project-root/
 │   ├── 207300399835378276/         # Model artifacts for specific runs
 │   ├── <hash_id>/artifacts         # Artifacts (e.g., models) for other runs
 └── <hash_id>/                      # Unique identifiers for each experiment run
-Installation and Setup
-Prerequisites
-Python 3.8 or higher
-Git, DVC, and MLflow installed
-DagsHub account for remote experiment tracking
-Step-by-Step Setup
-Clone the Repository
+```
 
-bash
-Copy code
-git clone <your-repo-url>
-cd predictive_maintenance
-Install Dependencies
+---
 
-bash
-Copy code
-pip install -r requirements.txt
-Set up DVC and Data Storage
-Configure DVC to manage datasets:
+## Installation and Setup
 
-bash
-Copy code
-dvc init
-dvc remote add -d <remote-name> <remote-url>
-dvc pull  # Pull data files if they are already tracked in DVC
-MLflow Setup
-Configure MLflow with your DagsHub URI for experiment tracking:
+### Prerequisites
+- Python 3.8 or higher
+- Git, DVC, and MLflow installed
+- [DagsHub](https://dagshub.com/) account for remote experiment tracking
 
-python
-Copy code
-mlflow.set_tracking_uri("https://dagshub.com/username/repo_name.mlflow")
-Data Pipeline
+### Step-by-Step Setup
+
+1. **Clone the Repository**  
+   ```bash
+   git clone <your-repo-url>
+   cd predictive_maintenance
+   ```
+
+2. **Install Dependencies**  
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Set up DVC and Data Storage**  
+   Configure DVC to manage datasets:
+   ```bash
+   dvc init
+   dvc remote add -d <remote-name> <remote-url>
+   dvc pull  # Pull data files if they are already tracked in DVC
+   ```
+
+4. **MLflow Setup**  
+   Configure MLflow with your DagsHub URI for experiment tracking:
+   ```python
+   mlflow.set_tracking_uri("https://dagshub.com/username/repo_name.mlflow")
+   ```
+
+---
+
+## Data Pipeline
+
 The journey begins with building a robust data pipeline, which ensures high-quality data flows through the model:
 
-Data Collection
-The data_collection.py script is responsible for sourcing and organizing raw data files into the data/processed/ folder.
+1. **Data Collection**  
+   The `data_collection.py` script is responsible for sourcing and organizing raw data files into the `data/processed/` folder.
 
-Data Preprocessing
-With data_pre.py, the data undergoes preprocessing steps, including handling missing values, scaling, and encoding features as required. This processed dataset is now clean and ready for model input.
+2. **Data Preprocessing**  
+   With `data_pre.py`, the data undergoes preprocessing steps, including handling missing values, scaling, and encoding features as required. This processed dataset is now clean and ready for model input.
 
-Data Versioning
-DVC tracks changes in the dataset, allowing for easy experimentation with different data versions and ensuring reproducibility across runs.
+3. **Data Versioning**  
+   DVC tracks changes in the dataset, allowing for easy experimentation with different data versions and ensuring reproducibility across runs.
 
-Model Training and Evaluation
+---
+
+## Model Training and Evaluation
+
 Once the data is ready, we proceed to create and train a baseline model:
 
-Model Initialization
-The model setup begins in model_building.py, where a RandomForestClassifier is defined, with hyperparameters outlined in params.yaml.
+1. **Model Initialization**  
+   The model setup begins in `model_building.py`, where a `RandomForestClassifier` is defined, with hyperparameters outlined in `params.yaml`.
 
-Training
-Training occurs in main.py, which orchestrates the entire pipeline, from data loading to model evaluation. Here, we fit the model on the training data and assess it on validation data to ensure it generalizes well.
+2. **Training**  
+   Training occurs in `main.py`, which orchestrates the entire pipeline, from data loading to model evaluation. Here, we fit the model on the training data and assess it on validation data to ensure it generalizes well.
 
-Initial Model Evaluation
-The model_eval.py script evaluates the model’s performance using metrics like accuracy, precision, recall, and F1 score. The metrics.json file, generated at this stage, holds these results, making it easy to compare baseline and fine-tuned models.
+3. **Initial Model Evaluation**  
+   The `model_eval.py` script evaluates the model’s performance using metrics like accuracy, precision, recall, and F1 score. The `metrics.json` file, generated at this stage, holds these results, making it easy to compare baseline and fine-tuned models.
 
-Hyperparameter Tuning for Optimization
+---
+
+## Hyperparameter Tuning for Optimization
+
 Having established a baseline, we move to optimize model performance through hyperparameter tuning:
 
-Defining the Parameter Grid
-In hyperpara.py, we define a parameter grid to explore potential configurations for the RandomForestClassifier, including settings for n_estimators and max_depth.
+1. **Defining the Parameter Grid**  
+   In `hyperpara.py`, we define a parameter grid to explore potential configurations for the `RandomForestClassifier`, including settings for `n_estimators` and `max_depth`.
 
-Randomized Search
-A RandomizedSearchCV object tests different configurations. Each run within this search is logged as a nested run using MLflow, allowing us to track each combination's performance metrics and parameters.
+2. **Randomized Search**  
+   A `RandomizedSearchCV` object tests different configurations. Each run within this search is logged as a nested run using MLflow, allowing us to track each combination's performance metrics and parameters.
 
-Selecting the Best Parameters
-The best combination of hyperparameters, recorded in the MLflow experiment logs, is saved as the optimal model for predictive maintenance tasks.
+3. **Selecting the Best Parameters**  
+   The best combination of hyperparameters, recorded in the MLflow experiment logs, is saved as the optimal model for predictive maintenance tasks.
 
-Experiment Tracking and Artifacts
-MLflow Tracking
-With each step logged in MLflow, this setup ensures a complete record of model evolution. The mlruns/ directory houses details on each run, from parameter settings to model performance.
+---
 
-Artifacts
-MLflow and DVC store critical artifacts like the trained model, evaluation plots, and the con_met.png confusion matrix. This image file helps visualize the classification success and errors for further insights.
+## Experiment Tracking and Artifacts
 
-Metrics and Model Performance
-The model's performance metrics are recorded in the metrics.json file. Here’s an example:
+### MLflow Tracking
 
-json
-Copy code
+With each step logged in MLflow, this setup ensures a complete record of model evolution. The `mlruns/` directory houses details on each run, from parameter settings to model performance.
+
+### Artifacts
+
+MLflow and DVC store critical artifacts like the trained model, evaluation plots, and the `con_met.png` confusion matrix. This image file helps visualize the classification success and errors for further insights.
+
+---
+
+## Metrics and Model Performance
+
+The model's performance metrics are recorded in the `metrics.json` file. Here’s an example:
+
+```json
 {
     "accuracy": 0.9845,
     "f1_score": 0.7438,
     "precission": 0.7965,
     "recall": 0.6977
 }
-Metric Descriptions
-Accuracy: Measures the ratio of correct predictions to total predictions, indicating general reliability.
-F1 Score: The harmonic mean of precision and recall, representing the model’s balance between sensitivity and specificity.
-Precision: Indicates the percentage of relevant results in the positive predictions, showing model confidence in predicting machine failure.
-Recall: Shows the percentage of actual positives that were correctly classified, reflecting the model’s sensitivity.
-Running the Project
-Prepare the Data
-Make sure the data is properly processed and located in the data/processed/ directory.
+```
 
-Hyperparameter Tuning
-Run hyperpara.py to initiate the hyperparameter search.
+### Metric Descriptions
+- **Accuracy**: Measures the ratio of correct predictions to total predictions, indicating general reliability.
+- **F1 Score**: The harmonic mean of precision and recall, representing the model’s balance between sensitivity and specificity.
+- **Precision**: Indicates the percentage of relevant results in the positive predictions, showing model confidence in predicting machine failure.
+- **Recall**: Shows the percentage of actual positives that were correctly classified, reflecting the model’s sensitivity.
 
-bash
-Copy code
-python src/hyperpara.py
-Model Training and Evaluation
-Run the main pipeline to train the model and evaluate results.
+---
 
-bash
-Copy code
-python src/main.py
-Generate Plots and Artifacts
-Artifacts, such as the confusion matrix plot, are generated automatically and saved for review.
+## Running the Project
+
+1. **Prepare the Data**  
+   Make sure the data is properly processed and located in the `data/processed/` directory.
+
+2. **Hyperparameter Tuning**  
+   Run `hyperpara.py` to initiate the hyperparameter search.
+   ```bash
+   python src/hyperpara.py
+   ```
+
+3. **Model Training and Evaluation**  
+   Run the main pipeline to train the model and evaluate results.
+   ```bash
+   python src/main.py
+   ```
+
+4. **Generate Plots and Artifacts**  
+   Artifacts, such as the confusion matrix plot, are generated automatically and saved for review.
+
+---
 
 This comprehensive, narrative documentation walks through each step of the predictive maintenance project, creating a clear roadmap for developers and stakeholders alike.
