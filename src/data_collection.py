@@ -19,11 +19,12 @@ try:
     df = pd.concat([X,dfone],axis=1)
     df.drop('Type',axis=1,inplace=True)
 
-    #x,y = SMOTE().fit_resample(df,y['Machine failure'])
-    #x['Machine failure'] = y
-    x = df
-    y = y['Machine failure']
+    x,y = SMOTE().fit_resample(df,y['Machine failure'])
     x['Machine failure'] = y
+    
+    #y = y['Machine failure']
+    
+    #x['Machine failure'] = y
 
     test_size = yaml.safe_load(open('params.yaml'))['data_collection']['test_size']
 

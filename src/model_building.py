@@ -26,7 +26,7 @@ try:
     n_estimators = yaml.safe_load(open('params.yaml'))['model_building']['n_estimators']
 
 
-    rf = GradientBoostingClassifier(n_estimators=n_estimators)
+    rf = RandomForestClassifier(random_state=42)
     rf.fit(x_train, y_train)
 
 

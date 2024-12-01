@@ -5,7 +5,7 @@ stages:
     deps:
     - path: src/data_collection.py
       hash: md5
-      md5: 3534af6fc748cd8aee5bbc9e35d3907c
+      md5: 9e61c58ff8e7a4663a62e47cc2c37d40
       size: 1277
     params:
       params.yaml:
@@ -13,16 +13,16 @@ stages:
     outs:
     - path: data/raw
       hash: md5
-      md5: 3a59b74138f1e30f72b69795056914b1.dir
-      size: 405055
+      md5: 7e351c606f4a9d4b7014b9fee84ae3bf.dir
+      size: 1249920
       nfiles: 2
   pre_processing:
     cmd: python src/data_pre.py
     deps:
     - path: data/raw
       hash: md5
-      md5: 3a59b74138f1e30f72b69795056914b1.dir
-      size: 405055
+      md5: 7e351c606f4a9d4b7014b9fee84ae3bf.dir
+      size: 1249920
       nfiles: 2
     - path: src/data_pre.py
       hash: md5
@@ -31,36 +31,36 @@ stages:
     outs:
     - path: data/processed
       hash: md5
-      md5: 533650b87940b01e3b5637e9369f62c2.dir
-      size: 405055
+      md5: b745f052fbee744008d61f672f5bc058.dir
+      size: 1244384
       nfiles: 2
   model_building:
     cmd: python .\src\model_building.py
     deps:
     - path: .\data\processed\
       hash: md5
-      md5: 533650b87940b01e3b5637e9369f62c2.dir
-      size: 405055
+      md5: b745f052fbee744008d61f672f5bc058.dir
+      size: 1244384
       nfiles: 2
     - path: .\src\model_building.py
       hash: md5
-      md5: 6fd1502c54ee1943516f6fe94d8a7bcd
-      size: 1154
+      md5: a4eb33041d097fd0c14e3251f4378a33
+      size: 1140
     params:
       params.yaml:
         model_building.n_estimators: 500
     outs:
     - path: .\model.pkl
       hash: md5
-      md5: bd7e4323f8fcef63f392c5bf70034df5
-      size: 654833
+      md5: 316f33c1ac0d2c7066ccff9d2f7d524b
+      size: 7122494
   model_eval:
     cmd: python .\src\model_eval.py
     deps:
     - path: .\model.pkl
       hash: md5
-      md5: bd7e4323f8fcef63f392c5bf70034df5
-      size: 654833
+      md5: 316f33c1ac0d2c7066ccff9d2f7d524b
+      size: 7122494
     - path: .\src\model_eval.py
       hash: md5
       md5: bed739244ece7b3ff563ba5f498ddcf7
@@ -68,5 +68,5 @@ stages:
     outs:
     - path: metrics.json
       hash: md5
-      md5: eb189f63e09eed91656adb3c062ba38d
-      size: 137
+      md5: 015279a25388c56e915a43794199ea8f
+      size: 131
