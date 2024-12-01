@@ -163,10 +163,10 @@ The model's performance metrics are recorded in the `metrics.json` file. Here’
 
 ```json
 {
-    "accuracy": 0.9845,
-    "f1_score": 0.7438,
-    "precission": 0.7965,
-    "recall": 0.6977
+    "acc": 0.9822745503946176,
+    "f1": 0.9823294208693409,
+    "pre": 0.9736640245461519,
+    "reca": 0.9911504424778761
 }
 ```
 
