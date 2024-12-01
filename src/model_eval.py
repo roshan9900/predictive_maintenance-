@@ -32,6 +32,8 @@ try:
 
     
         rf = pickle.load(open('model.pkl','rb'))
+        sc = pickle.load(open('scalar.pkl','rb'))
+        x_test = sc.transform(x_test)
         pred = rf.predict(x_test)
 
         acc = accuracy_score(y_test, pred)
